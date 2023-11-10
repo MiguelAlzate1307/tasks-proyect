@@ -1,0 +1,50 @@
+.container {
+    background: linear-gradient(#15900D, #202020);
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 27px;
+    height: 400px;
+}
+
+input{
+    display: block;
+    margin: 10px auto;
+    padding: 7px;
+    border: 2px solid #fff;
+    border-radius: 14px;
+    text-align: center;
+    background: none;
+    color: #fff;
+}
+
+input:focus{
+    background-color: #fff;
+    color: black;
+    width: 220px;
+    transition: .7s;
+}
+
+button{
+    display: block;
+    margin: auto;
+    padding: 10px;
+    border-radius: 16px;
+    border: 2px solid #27ae60;
+    background: none;
+    color: white;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+
+button:hover{
+    background-color: #27ae60;
+    transition: .7s;
+}
+
+a{
+    text-decoration: none;
+    color: #2980b9;
+}
