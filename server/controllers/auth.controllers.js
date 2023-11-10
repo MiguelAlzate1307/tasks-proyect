@@ -43,7 +43,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const user = await User.login(req.body.email);
+    const user = await User.getUser(null, req.body.email);
 
     if (user instanceof Error)
       return res.status(500).json({
@@ -81,7 +81,7 @@ export const login = async (req, res) => {
 
 export const profile = async (req, res) => {
   try {
-    const user = await User.findById(req.user.id);
+    const user = await User.getUser(req.user.id);
 
     if (user instanceof Error)
       return res.status(500).json({
@@ -111,22 +111,18 @@ export const updateProfile = async (req, res) => {
     const result = await User.updateData(req.body, req.user.id);
 
     if (result instanceof Error)
-      return res
-        .status(500)
-        .json({
-          message: "Error al actualizar el usuario",
-          error: result.message,
-        });
+      return res.status(500).json({
+        message: "Error al actualizar el usuario",
+        error: result.message,
+      });
 
-    const user = await User.findById(req.user.id);
+    const user = await User.getUser(req.user.id);
 
     if (user instanceof Error)
-      return res
-        .status(500)
-        .json({
-          message: "Error al recuperar el usuario actualizado",
-          error: user.message,
-        });
+      return res.status(500).json({
+        message: "Error al recuperar el usuario actualizado",
+        error: user.message,
+      });
 
     return res.json({
       id: user[0].id,
@@ -134,11 +130,9 @@ export const updateProfile = async (req, res) => {
       email: user[0].email,
     });
   } catch (error) {
-    return res
-      .status(500)
-      .json({
-        message: "Error al actualizar el usuario",
-        error: error.message,
-      });
+    return res.status(500).json({
+      message: "Error al actualizar el usuario",
+      error: error.message,
+    });
   }
 };

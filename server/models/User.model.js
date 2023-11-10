@@ -12,11 +12,12 @@ User.register = async (userData) => {
   }
 };
 
-User.login = async (email) => {
+User.getUser = async (id, email) => {
   try {
-    const [user] = await db.query("SELECT * FROM users WHERE email = ?", [
-      email,
-    ]);
+    const [user] = await db.query(
+      `SELECT * FROM users WHERE ${id ? "id" : "email"} = ?`,
+      [id ? id : email]
+    );
 
     return user;
   } catch (error) {
@@ -32,16 +33,6 @@ User.updateData = async (newData, id) => {
     ]);
 
     return result;
-  } catch (error) {
-    return new Error(error.message);
-  }
-};
-
-User.findById = async (id) => {
-  try {
-    const [user] = await db.query("SELECT * FROM users WHERE id = ?", [id]);
-
-    return user;
   } catch (error) {
     return new Error(error.message);
   }
